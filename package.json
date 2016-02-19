@@ -1,6 +1,6 @@
 {
   "name": "ghost-writer",
-  "description": "Ghost Writer is outputs the sentence as typewriter.",
+  "description": "Ghost Writer outputs the sentence like typewriter.",
   "version": "0.0.0",
   "author": "ideyuta <ide.yuta@gmail.com>",
   "bugs": {
