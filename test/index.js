@@ -1,17 +1,18 @@
 import assert from 'assert';
-import ghostWriter from '../index';
+import {ghost} from '../index';
 
 /** @test {ghostWriter} */
 describe('ghostWriter', () => {
-  let text = '';
-
-  beforeEach(() => {
-    text = 'あのイーハトーヴォのすきとおった風';
+  it('param is Array', () => {
+    const struct = [{
+      i: 'shibuya',
+      o: '渋谷'
+    }];
+    assert.deepEqual(ghost(struct), ['s', 'sh', 'し', 'しb', 'しぶ', 'しぶy', 'しぶや', '渋谷']);
   });
 
-  it('should return string', () => {
-    let t = '';
-    ghostWriter(text, _text => t = _text, 1);
-    assert(t === 'あ');
+  it('param is String', () => {
+    const struct = 'しぶや';
+    assert.deepEqual(ghost(struct), ['し', 'しぶ', 'しぶや']);
   });
 });
