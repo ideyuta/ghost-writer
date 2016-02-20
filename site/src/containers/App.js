@@ -1,6 +1,31 @@
 import React from 'react';
 import ghostWriter from 'ghost-writer';
 
+const struct = {
+  en: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+  ja: [
+    {
+      i: 'anoiーhatoーvono',
+      o: 'あのイーハトーヴォの'
+    }, {
+      i: 'sukitoottakaze',
+      o: 'すきとおった風、<br />'
+    }, {
+      i: 'natsudemo',
+      o: '夏でも'
+    }, {
+      i: 'sokoni',
+      o: '底に'
+    }, {
+      i: 'tsumetasawomotsu',
+      o: '冷たさをもつ'
+    }, {
+      i: 'aoisora',
+      o: '青いそら'
+    }
+  ]
+};
+
 export default class App extends React.Component {
 
   constructor(props) {
@@ -9,14 +34,18 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    ghostWriter('あのイーハトーヴォのすきとおった風', text => this.setState({text}), 300);
+    const writer = ghostWriter(struct.ja);
+    writer(text => this.setState({text}));
   }
 
   render() {
     return (
-      <div>
-        <p>Ghost Writer</p>
-        <p>{this.state.text}</p>
+      <div className="Wrapper">
+        <h1>Ghost Writer</h1>
+        <p
+          className="text"
+          dangerouslySetInnerHTML={{__html: this.state.text}}
+        />
       </div>
     );
   }
