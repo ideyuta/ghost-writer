@@ -1,41 +1,109 @@
+import romaji from 'romaji';
+
 /**
  * ghostWriter
  *
- * @param {string} text - text
- * @param {Function} cb - callback function
- * @param {number} [msec] - interval milliseconds
+ * @param {Array|string} rawStruct - ghost raw struct
+ * @param {string} [lang] - language
+ * @return {Function}
  */
-export default function ghostWriter(text, cb, msec = 100) {
-  const g = ghost(text);
+export default function ghostWriter(rawStruct, lang = 'ja') {
+  const g = lang === 'ja' ? ghost(rawStruct) : ghostEn(rawStruct);
   let count = -2;
-  writer();
 
   /**
    * writer
    *
+   * @param {Function} cb - callback function
+   * @param {number} [msec] - interval milliseconds
    * @return {string|null}
    */
-  function writer() {
+  function writer(cb, msec = 100) {
     count++;
     if (count < g.length - 1) {
-      setTimeout(writer, msec);
+      setTimeout(writer.bind(undefined, cb, msec), msec);
     }
     if (count >= 0) {
       return cb(g[count]);
     }
   }
+
+  return writer;
 }
 
 /**
- * ghost
+ * Ghost
  *
- * @param {string} text - text
- * @return {string[]}
+ * @param {Array|String} rawStruct - ghost raw struct
+ * @return {string[]} ghostruct
  */
-export function ghost(text) {
-  const struct = [];
-  text.split('').forEach((t, key) => {
-    struct.push(key > 0 ? struct[key - 1] + t : t);
+export function ghost(rawStruct) {
+  const ghostruct = [];
+  parser(rawStruct);
+
+  /**
+   * parser
+   *
+   * @param {Array|String} struct - ghost raw struct
+   */
+  function parser(struct) {
+    if (Array.isArray(struct)) {
+      struct.forEach(element => {
+        if (Array.isArray(element.i)) {
+          const length = ghostruct.length;
+          parser(element.i);
+          const preEl = ghostruct[length - 1] || '';
+          ghostruct.push(preEl + element.o);
+        } else {
+          const strings = element.i.split('');
+          strings.forEach(s => {
+            ghostruct.push(ghostruct.length > 0 ? ghostruct[ghostruct.length - 1] + s : s);
+          });
+          const preEl = ghostruct[ghostruct.length - 1];
+          ghostruct.push(preEl.substr(0, preEl.length - strings.length) + element.o);
+        }
+      });
+    } else if (typeof struct === 'string') {
+      struct.split('').forEach((element, key) => {
+        ghostruct.push(key > 0 ? ghostruct[key - 1] + element : element);
+      });
+    }
+  }
+
+  return n(ghostruct);
+}
+
+/**
+ * Ghost English
+ *
+ * @param {String} rawStruct - ghost raw struct
+ * @return {string[]} ghostruct
+ */
+export function ghostEn(rawStruct) {
+  const ghostruct = [];
+  rawStruct.split('').forEach((element, key) => {
+    ghostruct.push(key > 0 ? ghostruct[key - 1] + element : element);
   });
-  return struct;
+  return ghostruct;
+}
+
+
+/**
+ * Exception N
+ *
+ * @param {Array} struct - ghostruct
+ * @return {Array} struct - ghostruct
+ */
+function n(struct) {
+  return struct.map(el => {
+    const els = el.split('');
+    let hiragana = romaji.toHiragana(el);
+    if (els[els.length - 1] === 'n') {
+      const tmp = hiragana.split('');
+      tmp.pop();
+      tmp.push('n');
+      hiragana = tmp.join('');
+    }
+    return hiragana;
+  });
 }
