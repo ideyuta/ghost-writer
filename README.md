@@ -73,7 +73,7 @@ writer(t => text = t);
 import ghostWriter from 'ghost-writer';
 
 const struct = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit';
-const writer = ghostWriter(struct, 'en');
+const writer = ghostWriter(struct);
 
 let text = '';
 writer(t => text = t, 50);
@@ -111,10 +111,7 @@ ghost([{i: 'anoiーhatoーvono', o: 'あのイーハトーヴォの'}]);
 ## Types
 
 ```js
-ghostWriter: (
-  struct: RawGhostruct|string,
-  lang: 'en' | 'ja' = 'ja'
-  ) => writer
+ghostWriter: (struct: RawGhostruct|string) => writer
 ```
 
 ```js
@@ -125,9 +122,7 @@ writer: (
 ```
 
 ```js
-ghost: (
-  struct: RawGhostruct|string,
-) => string[]
+ghost: (struct: RawGhostruct|string) => string[]
 ```
 
 ```js
