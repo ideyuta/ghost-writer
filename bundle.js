@@ -9,7 +9,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = ghostWriter;
 exports.ghost = ghost;
-exports.ghostEn = ghostEn;
 
 var _romaji = require('romaji');
 
@@ -21,13 +20,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * ghostWriter
  *
  * @param {Array|string} rawStruct - ghost raw struct
- * @param {string} [lang] - language
  * @return {Function}
  */
 function ghostWriter(rawStruct) {
-  var lang = arguments.length <= 1 || arguments[1] === undefined ? 'ja' : arguments[1];
-
-  var g = lang === 'ja' ? ghost(rawStruct) : ghostEn(rawStruct);
+  var g = ghost(rawStruct);
   var count = -2;
 
   /**
@@ -91,30 +87,16 @@ function ghost(rawStruct) {
     }
   }
 
-  return n(ghostruct);
+  return Array.isArray(rawStruct) ? hiraganize(ghostruct) : ghostruct;
 }
 
 /**
- * Ghost English
- *
- * @param {String} rawStruct - ghost raw struct
- * @return {string[]} ghostruct
- */
-function ghostEn(rawStruct) {
-  var ghostruct = [];
-  rawStruct.split('').forEach(function (element, key) {
-    ghostruct.push(key > 0 ? ghostruct[key - 1] + element : element);
-  });
-  return ghostruct;
-}
-
-/**
- * Exception N
+ * Hiraganaize
  *
  * @param {Array} struct - ghostruct
  * @return {Array} struct - ghostruct
  */
-function n(struct) {
+function hiraganize(struct) {
   return struct.map(function (el) {
     var els = el.split('');
     var hiragana = _romaji2.default.toHiragana(el);
@@ -19498,7 +19480,7 @@ var struct = {
     o: 'あのイーハトーヴォの'
   }, {
     i: 'sukitoottakaze',
-    o: 'すきとおった風、<br />'
+    o: 'すきとおった風、'
   }, {
     i: 'natsudemo',
     o: '夏でも'
@@ -19539,19 +19521,10 @@ var App = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      return _react2.default.createElement(
-        'div',
-        { className: 'Wrapper' },
-        _react2.default.createElement(
-          'h1',
-          null,
-          'Ghost Writer'
-        ),
-        _react2.default.createElement('p', {
-          className: 'text',
-          dangerouslySetInnerHTML: { __html: this.state.text }
-        })
-      );
+      return _react2.default.createElement('p', {
+        className: 'text',
+        dangerouslySetInnerHTML: { __html: this.state.text }
+      });
     }
   }]);
 
