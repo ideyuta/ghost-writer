@@ -69,16 +69,16 @@ export function ghost(rawStruct) {
     }
   }
 
-  return Array.isArray(rawStruct) ? n(ghostruct) : ghostruct;
+  return Array.isArray(rawStruct) ? hiraganize(ghostruct) : ghostruct;
 }
 
 /**
- * Exception N
+ * Hiraganaize
  *
  * @param {Array} struct - ghostruct
  * @return {Array} struct - ghostruct
  */
-function n(struct) {
+function hiraganize(struct) {
   return struct.map(el => {
     const els = el.split('');
     let hiragana = romaji.toHiragana(el);
