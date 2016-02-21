@@ -16,6 +16,7 @@
     "babelify": "^7.2.0",
     "browserify": "^13.0.0",
     "chokidar-cli": "^1.2.0",
+    "cpx": "^1.2.1",
     "eslint": "^1.10.3",
     "eslint-config-kanmu": "^9.1.0",
     "eslint-plugin-sorting": "0.0.1",
@@ -31,13 +32,15 @@
     "url": "https://github.com/ideyuta/ghost-writer.git"
   },
   "scripts": {
-    "build": "mkdir -p dist/ && npm-run-all copy:html build:*",
+    "build": "mkdir -p dist/ && npm-run-all copy:images copy:html build:*",
     "build:css": "stylus -c src/styles/base.styl --include-css -I node_modules -o dist/bundle.css",
     "build:js": "browserify -t [ babelify --presets [ es2015 react ] ] src/index.js -o dist/bundle.js",
     "copy:html": "cp src/index.html dist/index.html",
+    "copy:images": "cpx \"src/images/**/{*.ico,*.svg,*.gif,*.png,*.jpg}\" dist/images",
     "deploy": "npm run build && gh-pages -d dist",
     "start": "npm-run-all --parallel watch:*",
     "watch:css": "chokidar src/styles/ -c 'npm run build:css'",
+    "watch:html": "chokidar src/index.html -c 'npm run copy:html'",
     "watch:js": "chokidar src/ -c 'npm run build:js'"
   }
 }

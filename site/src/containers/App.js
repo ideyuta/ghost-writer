@@ -9,7 +9,7 @@ const struct = {
       o: 'あのイーハトーヴォの'
     }, {
       i: 'sukitoottakaze',
-      o: 'すきとおった風、<br />'
+      o: 'すきとおった風、'
     }, {
       i: 'natsudemo',
       o: '夏でも'
@@ -40,13 +40,10 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <div className="Wrapper">
-        <h1>Ghost Writer</h1>
-        <p
-          className="text"
-          dangerouslySetInnerHTML={{__html: this.state.text}}
-        />
-      </div>
+      <p
+        className="text"
+        dangerouslySetInnerHTML={{__html: this.state.text}}
+      />
     );
   }
 }

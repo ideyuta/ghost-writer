@@ -12,7 +12,7 @@
 //-------------------------------
 
 html, body
-  font-family: Lato, Verdana, Arial, Roboto, "Droid Sans", "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif
+  font-family: Lato, Verdana, Arial, Roboto, "Droid Sans", "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif
   font-size: 16px
   letter-spacing: .02em
 
@@ -29,14 +29,163 @@ a
     color: $blue800
     text-decoration: underline
 
+iframe
+  border: 0
+  outline: none
+
 //-------------------------------
 // Components
 //-------------------------------
 
-.Wrapper
-  size(600px, auto)
+.Hero
+  minsize(auto, 340px)
+  size(100%, auto)
+  background: $blue500
+  box-sizing: border-box
   padding: 48px
+  &_ref
+    color: #fff
+    font-size: 12px
+    padding: 16px 0 0 0
+    text-align: right
+  .text
+    typo(48px, #fff, 400)
+    letter-spacing: .08
+    min-height: 80px
 
-.text
-  typo(20px, $gray900, 200)
-  letter-spacing: .08
++media(phone)
+  .Hero
+    min-height: 160px
+    padding: 16px
+    .text
+      font-size: 30px
+
+.Header
+  clearfix()
+  &_ghostwriter
+    color: #fff
+    float: left
+    font-weight: 100
+
++media(phone)
+  .Header
+    &_ghostwriter
+      font-size: 24px
+      line-height: 48px
+
+.Nav
+  display: flex
+  float: right
+  flex-direction: row
+  &_btn
+    btn(14px);
+    btn-varient($blue500, #fff);
+    border-radius: 4px
+    display: flex
+    flex-direction: row
+    font-size: 14px
+    font-weight: 300
+    margin: 24px 4px 0 4px
+    &:link
+      color: #fff
+    &:visited
+      color: #fff
+    &:hover
+      color: #fff
+    &:active
+      color: #fff
+    &_icon
+      size(16px)
+      padding: 0 8px 0 0
+
++media(phone)
+  .Nav
+    &_btn
+      &_icon
+        padding: 0
+      span
+        display: none
+
+.Contents
+  maxsize(768, auto)
+  size(100%, auto)
+  box-sizing: border-box
+  margin: 0 auto
+  padding: 48px
+  text-align: center
+
++media(phone)
+  .Contents
+    padding: 16px
+
+.Intro
+  &_ghostwriter
+    font-size: 2.5rem
+    font-weight: 200
+  &_description
+    color: $gray900
+  &_installation
+    background: $gray50
+    border(1px, solid, $gray100, 4px)
+    color: $blue600
+    display: inline-block
+    padding: 0 24px
+  &_repo
+    margin: 24px 0
+
+.Section
+  border(1px 0 0 0, solid, $gray100)
+  margin: 80px 0
+  text-align: left
+  &_image
+    max-width: 100%
+  &_title
+    font-size: 2.5rem
+    font-weight: 200
+  &_subtitle
+    font-size: 1.6rem
+    font-weight: 400
+    padding: 24px 0 0 0
+  &_list
+    padding: 0 0 24px 24px
+    &_item
+      line-height: 1.8em
+      padding: 0 0 8px 0
+
+.Code
+  border(1px, solid, $gray100, 4px)
+  padding: 0 24px
+  code
+    background: #fff
+    font-family: 'Inconsolata';
+    font-size: 14px
+    line-height: 20px
+    padding: 0
+
+.Footer
+  size(100%, auto)
+  background: $gray50
+  padding: 80px 0
+  &_content
+    max-width: 768px
+    margin: 0 auto
+    padding: 0 48px
+    text-align: center
+  &_social
+    align-items: center
+    display: flex
+    flex-direction: row
+    justify-content: center
+    p
+      margin: 0
+    &_item
+      padding: 0 8px
+  &_copyright
+    color: $gray300
+
++media(phone)
+  .Footer
+    &_content
+      padding: 0 16px
+
+

@@ -1,15 +1,156 @@
 <html>
   <head>
     <meta charSet="utf-8"/>
-    <meta content="ideyuta <ide.yuta@gmail.com>" name="author" />
-    <meta content="" name="description" />
-    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
-    <meta content="user-scalable=no width=device-width, initial-scale=1.0 maximum-scale=1.0" name="viewport" />
     <title>Ghost Writer</title>
+    <meta name="author" content="ideyuta <ide.yuta@gmail.com>" />
+    <meta name="description" content="ゴーストライターは日本語のタイピングを簡単に再現できるJavaScriptライブラリです。" />
+    <meta name="keywords" content="ゴーストライター, タイピング, タイプライター, タイプライティング, 日本語, ローマ字, 変換, JavaScript, JS, npm, typewriter, typewriting" />
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+    <meta name="viewport" content="user-scalable=no width=device-width, initial-scale=1.0 maximum-scale=1.0" />
+
+    <meta property="og:locale" content="ja_JP">
+    <meta property="og:title" content="Ghost Writer: 日本語のタイピングを簡単に再現できるJavaScriptライブラリ">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="http://ideyuta.com/ghost-writer/images/demo-ghostruct.gif">
+    <meta property="og:url" content="http://ideyuta.com/ghost-writer/">
+    <meta property="og:site_name" content="Ghost Writer">
+    <meta property="og:description" content="ゴーストライターは日本語のタイピングを簡単に再現できるJavaScriptライブラリです。">
+
+    <link rel="canonical" href="http://ideyuta.com/ghost-writer/">
+    <link rel="icon" href="./images/favicon.ico" type="image/png"/>
+
+    <link href='https://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/docco.min.css">
     <link href="./bundle.css" rel="stylesheet" />
     <script src="./bundle.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
   </head>
   <body>
-    <div id="app"></div>
+    <div class="Hero">
+      <div class="Header">
+        <h1 class="Header_ghostwriter">Ghost Writer</h1>
+        <div class="Nav">
+          <a class="Nav_btn" href="https://github.com/ideyuta/ghost-writer/">
+            <img alt="Mark" class="Nav_btn_icon" src="./images/GitHub-Mark-Light-120px-plus.png" />
+            <span>GitHub</span>
+          </a>
+          <a class="Nav_btn" href="https://twitter.com/intent/tweet?text=Ghost Writer: 日本語のタイピングを簡単に再現できるJavaScriptライブラリ&url=http://ideyuta.com/ghost-writer/&via=_ideyuta">
+            <img alt="Mark" class="Nav_btn_icon" src="./images/TwitterLogo_white.png" />
+            <span>Tweet</span>
+          </a>
+        </div>
+      </div>
+      <div id="app"></div>
+      <p class="Hero_ref">『宮沢賢治 ポラーノの広場』</p>
+    </div>
+    <div class="Contents">
+
+      <div class="Intro">
+        <h2 class="Intro_ghostwriter">Ghost Writer</h1>
+        <div class="Intro_description">
+          <p>日本語のタイピングを簡単に再現 🇯🇵</p>
+        </div>
+        <div class="Intro_installation">
+          <p>npm install ghost-writer</p>
+        </div>
+        <div class="Intro_repo">
+          <iframe src="https://ghbtns.com/github-btn.html?user=ideyuta&repo=ghost-writer&type=star&count=true&size=large" frameborder="0" scrolling="0" width="150px" height="30px"></iframe>
+          <iframe src="https://ghbtns.com/github-btn.html?user=ideyuta&repo=ghost-writer&type=fork&size=large" frameborder="0" scrolling="0" width="80px" height="30px"></iframe>
+        </div>
+      </div>
+      <div class="Usage Section">
+        <h2 class="Section_title">Usage</h2>
+        <h3 class="Section_subtitle">日本語変換タイピング</h3>
+        <ol class="Section_list">
+          <li class="Section_list_item">ghostWriterにローマ字表記の読み方と変換後のテキストで構成された配列を渡すと、writer関数を取得できます。</li>
+          <li class="Section_list_item">取得したwriter関数にテキスト受け取るコールバック関数と表示速度（デフォルト100msec）を渡して実行します。</li>
+          <li class="Section_list_item">指定タイミングごとにコールバック関数にテキストが渡ってきます。</li>
+        </ol>
+        <pre class="Code">
+          <code class="js">
+import ghostWriter from 'ghost-writer';
+
+const struct = [{
+  i: 'anoiーhatoーvono',
+  o: 'あのイーハトーヴォの'
+}, {
+  i: 'sukitoottakaze',
+  o: 'すきとおった風、'
+}, {
+  i: 'natsudemo',
+  o: '夏でも'
+}, {
+  i: 'sokoni',
+  o: '底に'
+}, {
+  i: 'tsumetasawomotsu',
+  o: '冷たさをもつ'
+}, {
+  i: 'aoisora',
+  o: '青いそら'
+}];
+const writer = ghostWriter(struct);
+
+let text = '';
+writer(t => text = t, 100);</code>
+        </pre>
+
+        <h3 class="Section_subtitle">非変換タイピング</h3>
+        <ol class="Section_list">
+          <li class="Section_list_item">ghostWriterにテキストを渡すと日本語変換をしないタイピングを表現できます。</li>
+        </ol>
+        <img class="Section_image" src="./images/demo-simple-text.gif" />
+        <pre class="Code">
+          <code class="js">
+import ghostWriter from 'ghost-writer';
+
+const writer = ghostWriter('あのイーハトーヴォのすきとおった風');
+
+let text = '';
+writer(t => text = t);</code>
+        </pre>
+
+        <img class="Section_image" src="./images/demo-en.gif" />
+        <pre class="Code">
+          <code class="js">
+import ghostWriter from 'ghost-writer';
+
+const struct = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit';
+const writer = ghostWriter(struct, 'en');
+
+let text = '';
+writer(t => text = t, 50);</code>
+        </pre>
+      </div>
+    </div>
+    <div class="Footer">
+      <div class="Footer_content">
+        <div class="Footer_social">
+          <div class="Footer_social_item">
+            <p>🙇</p>
+          </div>
+          <div class="Footer_social_item">
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://ideyuta.com/ghost-writer/" data-text="Ghost Writer: 日本語のタイピングを簡単に再現できるJavaScriptライブラリ" data-via="_ideyuta">Tweet</a>
+          </div>
+          <div class="Footer_social_item">
+            <iframe src="https://ghbtns.com/github-btn.html?user=ideyuta&repo=ghost-writer&type=fork&size=small" frameborder="0" scrolling="0" width="54px" height="20px"></iframe>
+          </div>
+          <div class="Footer_social_item">
+            <iframe src="https://ghbtns.com/github-btn.html?user=ideyuta&repo=ghost-writer&type=star&count=true&size=small" frameborder="0" scrolling="0" width="88px" height="20px"></iframe>
+          </div>
+        </div>
+        <p class="Footer_copyright">© 2016 ideyuta.com</p>
+      </div>
+    </div>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-36151317-1', 'auto');
+      ga('send', 'pageview');
+    </script>
   </body>
 </html>
