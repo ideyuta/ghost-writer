@@ -4,11 +4,10 @@ import romaji from 'romaji';
  * ghostWriter
  *
  * @param {Array|string} rawStruct - ghost raw struct
- * @param {string} [lang] - language
  * @return {Function}
  */
-export default function ghostWriter(rawStruct, lang = 'ja') {
-  const g = lang === 'ja' ? ghost(rawStruct) : ghostEn(rawStruct);
+export default function ghostWriter(rawStruct) {
+  const g = ghost(rawStruct);
   let count = -2;
 
   /**
@@ -70,23 +69,8 @@ export function ghost(rawStruct) {
     }
   }
 
-  return n(ghostruct);
+  return Array.isArray(rawStruct) ? n(ghostruct) : ghostruct;
 }
-
-/**
- * Ghost English
- *
- * @param {String} rawStruct - ghost raw struct
- * @return {string[]} ghostruct
- */
-export function ghostEn(rawStruct) {
-  const ghostruct = [];
-  rawStruct.split('').forEach((element, key) => {
-    ghostruct.push(key > 0 ? ghostruct[key - 1] + element : element);
-  });
-  return ghostruct;
-}
-
 
 /**
  * Exception N
