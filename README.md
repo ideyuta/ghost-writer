@@ -22,7 +22,7 @@ npm install ghost-writer
 
 ## Usage
 
-#### Japanese typewriting
+#### Japanese Typewriting
 
 ![Demo - Ghostruct](./demo-ghostruct.gif)
 
