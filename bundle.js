@@ -76,8 +76,8 @@ function ghost(rawStruct) {
           strings.forEach(function (s) {
             ghostruct.push(ghostruct.length > 0 ? ghostruct[ghostruct.length - 1] + s : s);
           });
-          var preEl = ghostruct[ghostruct.length - 1];
-          ghostruct.push(preEl.substr(0, preEl.length - strings.length) + element.o);
+          var _preEl = ghostruct[ghostruct.length - 1];
+          ghostruct.push(_preEl.substr(0, _preEl.length - strings.length) + element.o);
         }
       });
     } else if (typeof struct === 'string') {
