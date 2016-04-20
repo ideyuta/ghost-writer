@@ -235,10 +235,10 @@ function hiraganize(struct) {
         "ゔぉ": "vo",
 
         "じぇ": "je",
-        "てぃ": "ti",
-        "でぃ": "di",
-        "でゅ": "du",
-        "とぅ": "tu",
+        "てぃ": "thi",
+        "でぃ": "dhi",
+        "でゅ": "dhu",
+        "とぅ": "twu",
 
         //Monographs
 
@@ -314,7 +314,7 @@ function hiraganize(struct) {
 
         "ぐ": "gu",
         "ず": "zu",
-        "づ": "zu",
+        "づ": "du",
         "ぶ": "bu",
         "ぷ": "pu",
 
@@ -423,10 +423,10 @@ function hiraganize(struct) {
 
 
         "ジェ": "je",
-        "ティ": "ti",
-        "ディ": "di",
-        "デュ": "du",
-        "トゥ": "tu",
+        "ティ": "thi",
+        "ディ": "dhi",
+        "デュ": "dhu",
+        "トゥ": "twu",
 
 
         //basic
@@ -493,7 +493,7 @@ function hiraganize(struct) {
 
         "グ": "gu",
         "ズ": "zu",
-        "ヅ": "zu",
+        "ヅ": "du",
         "ブ": "bu",
         "プ": "pu",
 
