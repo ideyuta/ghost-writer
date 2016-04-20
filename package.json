@@ -7,7 +7,7 @@
     "url": "https://github.com/ideyuta/ghost-writer/issues"
   },
   "dependencies": {
-    "romaji": "^0.2.21"
+    "romaji": "ideyuta/romaji.js"
   },
   "devDependencies": {
     "babel-cli": "^6.5.1",
